@@ -12,7 +12,7 @@ export default function HomeBanner(){
                     <p className="text-yellow-400 font-bold text-2xl md:text-5xl ">GET 50% OFF</p>
                 </div>
                 <div className="w-1/3 relative aspect-video">
-                    <Image src="/banner-image.png" fill alt="banner image" className="object-contain"/>
+                    <Image src="/banner-image.png" fill alt="banner image" className="object-contain" sizes="50vw" priority/>
                 </div>
             </div>
         </div>
