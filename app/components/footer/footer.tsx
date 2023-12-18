@@ -30,7 +30,7 @@ export default function Footer(){
                 <div className="w-full md:w-1/3 mb-6 md:mb-0">
                     <h2 className="font-bold text-base mb-2">About Us</h2>
                     <p className="mb-2">
-                    Our shop started as a small business based on the idea of providing quality goods at reasonable prices. What began as a home-based online store has now grown into a thriving ecommerce company. We take pride in offering a wide variety of products to suit our customers' needs, with new items added frequently
+                    Our shop started as a small business based on the idea of providing quality goods at reasonable prices. What began as a home-based online store has now grown into a thriving ecommerce company. We take pride in offering a wide variety of products to suit our customers needs, with new items added frequently
                     </p>
                     <p>&copy; {new Date().getFullYear()} Ecommerce. All rights reserved.</p>
                 </div>
