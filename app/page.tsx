@@ -1,23 +1,17 @@
-import authOptions from '@/libs/authOptions'
-import { getServerSession } from 'next-auth'
-import Link from 'next/link'
+import Container from "./components/container";
+import HomeBanner from "./components/nav/homeBanner";
 
 export default async function Home() {
 
 
 
-  const session = await getServerSession(authOptions)
-
-
   return (
-    <div>
-
-      <h1>This is the main server page.</h1>
-
-      <h2>email : {session?.user?.email}</h2>
-
-
-    <Link href={'/login'}>Login</Link>
+    <div className="p-8">
+        <Container>
+          <div>
+            <HomeBanner/>
+          </div>
+        </Container>
     </div>
   )
 }
