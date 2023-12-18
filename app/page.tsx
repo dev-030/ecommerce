@@ -1,5 +1,5 @@
+import authOptions from '@/libs/authOptions'
 import { getServerSession } from 'next-auth'
-import { authOptions } from './api/auth/[...nextauth]/route'
 import Link from 'next/link'
 
 export default async function Home() {
@@ -8,7 +8,6 @@ export default async function Home() {
 
   const session = await getServerSession(authOptions)
 
-  console.log(session?.user)
 
   return (
     <div>
