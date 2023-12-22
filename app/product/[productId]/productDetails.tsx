@@ -66,7 +66,7 @@ export default function ProductDetails({product}:props){
     },[cartProduct.selectedImg])
 
 
-    console.log(cartProducts)
+    // console.log(cartProducts)
 
     const router = useRouter();
 

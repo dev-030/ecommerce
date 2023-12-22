@@ -1,11 +1,15 @@
+import Container from "../components/container";
+import CartClient from "./CartClient";
 
 
 export default function Cart(){
 
 
     return(
-        <div>
-            cart page.
+        <div className="pt-8">
+            <Container>
+                <CartClient/>
+            </Container>
         </div>
     )
 }

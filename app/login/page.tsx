@@ -3,13 +3,13 @@
 import { signIn, signOut, useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import React, { useState } from "react"
-import toast, { Toaster } from "react-hot-toast"
+import toast from "react-hot-toast"
 
 
 
 export default function Login (){
 
-    const session = useSession()
+    // const session = useSession()
 
 
     const [loading,setLoading] = useState('Log in')
@@ -68,22 +68,22 @@ export default function Login (){
     return(
         <div>
 
-            <h2 className="text-center pt-30 bg-black text-stone-50">{session?.status}</h2>
-
-            <Toaster/>
+            {/* <h2 className="text-center pt-30 bg-black text-stone-50">{session?.status}</h2> */}
         
             <h1>Hello this is the login page.</h1>
 
             <form onSubmit={onSubmit}>
                 <input name="email" type="text" placeholder="email"/>
                 <input name="password" type="text" placeholder="pasword"/>
-                {session?.status == 'unauthenticated' &&
+                <button type="submit">{loading}</button>
+
+                {/* {session?.status == 'unauthenticated' &&
                     <button type="submit">{loading}</button>
-                }
+                } */}
             </form>
-            {session?.status == 'authenticated' &&
+            {/* {session?.status == 'authenticated' &&
                 <button onClick={()=>signOut()}>Sign out</button>
-            }
+            } */}
         </div>
     )
 }
