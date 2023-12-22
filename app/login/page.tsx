@@ -11,7 +11,6 @@ export default function Login (){
 
     const session = useSession()
 
-    console.log(session)
 
     const [loading,setLoading] = useState('Log in')
 
