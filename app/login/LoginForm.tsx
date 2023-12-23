@@ -62,7 +62,7 @@ export default function LoginForm({currentUser}:props){
      return(
         <>
             <Heading title="Sign In"/>
-            <MyButton outline label="Continue with Google" icon={AiOutlineGoogle} onClick={()=>{}}/>
+            <MyButton outline label="Continue with Google" icon={AiOutlineGoogle} onClick={()=>signIn('google')}/>
             <hr className="bg-slate-300 w-full h-px"/>
             <Input id="email" lable="Email" disabled={isLoading} register={register} errors={errors} required/>
             <Input id="password" lable="Password" disabled={isLoading} register={register} errors={errors} required type="password"/>

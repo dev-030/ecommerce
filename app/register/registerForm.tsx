@@ -66,7 +66,7 @@ export default function RegisterForm({currentUser}:props){
      return(
         <>
             <Heading title="Sign Up"/>
-            <MyButton outline label="Sign up with Google" icon={AiOutlineGoogle} onClick={()=>{}}/>
+            <MyButton outline label="Continue with Google" icon={AiOutlineGoogle} onClick={()=>signIn('google')}/>
             <hr className="bg-slate-300 w-full h-px"/>
             <Input id="name" lable="Name" disabled={isLoading} register={register} errors={errors} required/>
             <Input id="email" lable="Email" disabled={isLoading} register={register} errors={errors} required/>
