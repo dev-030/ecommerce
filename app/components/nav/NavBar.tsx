@@ -1,12 +1,18 @@
 import Link from "next/link";
 import Container from "../container";
 import { Redressed } from "next/font/google";
+import CartCount from "./CartCount";
+import UserMenu from "./UserMenu";
+import { getCurrentUser } from "@/actions/getCurrentUser";
 
 
 
 const redDressed = Redressed({subsets: ['latin'],weight:['400']})
 
-export default function NavBar(){
+export default async function NavBar(){
+
+    const currentUser = await getCurrentUser()
+
 
     return(
         <div className="sticky top-0 z-30 w-full bg-slate-200 shadow-sm">
@@ -16,8 +22,8 @@ export default function NavBar(){
                         <Link href={'/'} className={`${redDressed.className} font-bold text-2xl`}>Ecommerce</Link>
                         <div className="hidden md:block">Search</div>
                         <div className="flex items-center gap-8 md:gap-12">
-                            <div>Cart Count</div>
-                            <div>user Menu</div>
+                            <CartCount/>
+                            <UserMenu currentUser={currentUser}/>
                         </div>
                     </div>
                 </Container>

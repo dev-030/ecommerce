@@ -7,6 +7,7 @@ import Footer from './components/footer/footer'
 import CartProvider from '@/providers/cartProvider'
 import { Toaster } from 'react-hot-toast'
 
+
 const poppins = Poppins({ subsets: ['latin'], weight:["400","700"] })
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   description: 'This is an ecommerce store',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode

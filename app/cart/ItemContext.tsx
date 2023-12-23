@@ -3,9 +3,9 @@ import FormatPrice from "@/libs/formatPrice"
 import { CartProductType } from "../product/[productId]/productDetails"
 import Link from "next/link"
 import TruncateText from "@/libs/truncateText"
-import MyButton from "../components/MyButton"
 import Image from "next/image"
 import SetQunatity from "../components/products/setQunatity"
+import { useCart } from "@/hooks/useCart"
 
 
 interface props {
@@ -14,6 +14,7 @@ interface props {
 
 export default function ItemContent({item}:props){
 
+    const {handleRemoveProductFromCart,handleCartQtyIncrease,handleCartQtyDecrease} = useCart()
 
     return(
         <div className="grid grid-cols-5 text-xs md:text-sm gap-4 border-t-[1.5px] border-slate-200 py-4 items-center">
@@ -29,13 +30,13 @@ export default function ItemContent({item}:props){
                     </Link>
                     <div>{item.selectedImg.color}</div>
                     <div className="w-[70px]">
-                        <button className="text-slate-500 underline" onClick={()=>{}}>Remove</button>
+                        <button className="text-slate-500 underline" onClick={()=>handleRemoveProductFromCart(item)}>Remove</button>
                     </div>
                 </div>
             </div>
             <div className="justify-self-center">{FormatPrice(item.price)}</div>
             <div className="justify-self-center">
-                <SetQunatity cartCounter={true} cartProduct={item} handleQunatityIncrease={()=>{}} handleQunatitydecrease={()=>{}}/>
+                <SetQunatity cartCounter={true} cartProduct={item} handleQunatityIncrease={()=>handleCartQtyIncrease(item)} handleQunatitydecrease={()=>handleCartQtyDecrease(item)}/>
             </div>
             <div className="justify-self-end font-semibold">
                 {FormatPrice(item.price * item.quantity)}

@@ -1,17 +1,19 @@
+import { getCurrentUser } from "@/actions/getCurrentUser";
+import FormWrap from "../components/FormWrap";
+import Container from "../components/container";
+import RegisterForm from "./registerForm";
 
 
 
-export default function Register (){
+export default async function Register (){
 
-
-
-
+    const currentUser = await getCurrentUser()
 
     return(
-        <div>
-        
-            <h1>Hello this is the register page.</h1>
-        
-        </div>
+        <Container>
+            <FormWrap> 
+                <RegisterForm currentUser={currentUser}/>
+            </FormWrap>
+        </Container>
     )
 }

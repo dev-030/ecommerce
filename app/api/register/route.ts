@@ -17,23 +17,6 @@ export async function POST(request:Request) {
     })
 
     return NextResponse.json({message:user})
-
 }
 
 
-export async function GET(request: Request) {
-    // const user = await prisma.user.findMany({}) 
-    // console.log(user?.hashedPassword)
-
-    const user = await prisma.user.findUnique({
-        where : {
-            email : "jamil@gmail.com"
-        }
-    }) 
-
-    if(!user ||  !user?.hashedPassword){
-        throw new Error('Invalid email and password')
-    }
-
-    return NextResponse.json(user)
-}
