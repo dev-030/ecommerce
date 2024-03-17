@@ -6,9 +6,16 @@ import Heading from "../components/Heading"
 import MyButton from "../components/MyButton"
 import ItemContent from "./ItemContext"
 import FormatPrice from "@/libs/formatPrice"
+import { useRouter } from "next/navigation"
+import { safeUser } from "@/types"
 
+interface props{
+    currentUser : safeUser | null
+}
 
-export default function CartClient(){
+export default function CartClient({currentUser}:props){
+
+    const router = useRouter();
 
     const {cartProducts,handleClearCart,cartTotalAmmout} = useCart()
 
@@ -52,7 +59,7 @@ export default function CartClient(){
                     <p className="text-slate-500">
                         Taxes and shipping calculate at checkout
                     </p>
-                    <MyButton label="Checkout" onClick={()=>{}}/>
+                    <MyButton label={currentUser ? "Checkout": "Login To Checkout"} outline={currentUser? false : true} onClick={()=> currentUser ? router.push('/checkout') : router.push('/login')}/>
                     <Link href={'/'} className="text-slate-500 flex items-center gap-1 mt-2">
                         <MdArrowBack size={20}/>
                         <span>Continue Shopping</span>

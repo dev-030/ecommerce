@@ -14,7 +14,9 @@ const calculateOrderAmmount = (items:CartProductType[]) => {
         return acc+itemTotal
     },0)
 
-    return totalPrice;
+    const price:any = Math.floor(totalPrice)
+
+    return price;
 }
 
 export async function POST(request:Request) {
@@ -30,14 +32,63 @@ export async function POST(request:Request) {
 
     const orderData = {
         user : {connect: {id:currentUser.id}},
-        ammount : total ,
+        amount : total ,
         currency : 'usd' ,
         status : "pending",
         deliveryStatus : 'pending',
         paymentIntentId : payment_intent_id,
-        products : items
+        products : items,
     }
 
-    
+    if(payment_intent_id){
 
+        // update the order
+        const current_intent = await stripe.paymentIntents.retrieve(payment_intent_id)
+
+        if(current_intent){
+            const updated_intent = await stripe.paymentIntents.update(
+                payment_intent_id ,
+                {amount:total}
+            )
+
+            const [existing_order, update_order] = await Promise.all([
+                prisma.order.findFirst({
+                    where : {
+                        paymentIntentId : payment_intent_id
+                    }
+                }),
+                prisma.order.update({
+                    where : { paymentIntentId : payment_intent_id },
+                    data : {
+                        amount : total,
+                        products: items
+                    } 
+                })
+            ])
+    
+    
+            if(!existing_order){
+                return NextResponse.json({error:'Invalid payment intent'},{status:400})
+            }
+
+            return NextResponse.json({paymentIntent: updated_intent})
+        }
+
+    }else {
+        // if we don't have an payment intent then do this....
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: total ,
+            currency : 'usd',
+            automatic_payment_methods: {enabled:true}
+        })
+
+        orderData.paymentIntentId = paymentIntent.id
+
+
+        await prisma.order.create({
+            data : orderData
+        })
+
+        return NextResponse.json({paymentIntent})
+    }
 }

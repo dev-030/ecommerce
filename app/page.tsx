@@ -8,7 +8,6 @@ import ProductCard from "./components/products/productCard";
 export default async function Home() {
 
 
-
   return (
     <div className="p-8">
         <Container>
