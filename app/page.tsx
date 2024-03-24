@@ -1,12 +1,26 @@
-import TruncateText from "@/libs/truncateText";
+import NullData from "./components/NullData";
 import Container from "./components/container";
 import HomeBanner from "./components/nav/homeBanner";
-import {products} from '@/libs/products'
 import ProductCard from "./components/products/productCard";
+import getProducts, { IProductParams } from "@/actions/getProducts";
 
+export default async function Home({searchParams}:{searchParams:IProductParams}) {
 
-export default async function Home() {
+  const products = await getProducts(searchParams)
 
+  if(products.length === 0) return <NullData title="No products found"/>
+
+  // fisher-yates shuffle algorithm
+  // function shuffleArray(array:any){
+  //   for(let i=array.length-1; i>0; i++){
+  //       const j = Math.floor(Math.random()*(i+1));
+  //       [array[i], array[j]] = [array[j], array[i]]
+  //   }
+  //   return array;
+  // }
+
+  
+  // const shuffledProducts = shuffleArray(products)
 
   return (
     <div className="p-8">

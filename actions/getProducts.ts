@@ -5,7 +5,6 @@ export interface IProductParams {
 	searchTerm?: string | null;
 }
 
-//------------10:12:38
 
 export default async function getProducts(params: IProductParams) {
 	try {
@@ -14,7 +13,42 @@ export default async function getProducts(params: IProductParams) {
 		if (!searchTerm) {
 			searchString = "";
 		}
+
 		let query: any = {};
+
+		if (category) {
+			query.category = category
+		}
+
+		const products = await prisma.product.findMany({
+			where:{
+				...query,
+				OR:[
+					{
+						name:{
+							contains:searchString,
+							mode: 'insensitive'
+						},
+						description:{
+							contains:searchString,
+							mode: 'insensitive'
+						}
+					}
+				]
+			},
+			include:{
+				reviews:{
+					include:{
+						user:true
+					},
+					orderBy:{
+						createdAt:'desc'
+					}
+				}
+			}
+		})
+
+		return products;
 	} catch (error: any) {
 		throw new Error(error);
 	}

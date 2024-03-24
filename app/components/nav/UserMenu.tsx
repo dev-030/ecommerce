@@ -35,7 +35,7 @@ export default function UserMenu({currentUser}:props){
 
                     {currentUser ? 
                         <div>
-                            <Link href={'/order'}>
+                            <Link href={'/orders'}>
                                 <MenuItem onClick={toggleOpen}>
                                     Your Orders
                                 </MenuItem>

@@ -4,6 +4,7 @@ import { Redressed } from "next/font/google";
 import CartCount from "./CartCount";
 import UserMenu from "./UserMenu";
 import { getCurrentUser } from "@/actions/getCurrentUser";
+import Categorys from "./Categorys";
 
 
 
@@ -28,6 +29,7 @@ export default async function NavBar(){
                     </div>
                 </Container>
             </div>
+            <Categorys/>
         </div>
     )
 }
